@@ -17,7 +17,7 @@ function AddCourse() {
     }
 
     try {
-      await API.post("/courses", course);
+      await API.post("/courses", { ...course, students: Number(course.students) });
       toast.success("Course Added Successfully");
       setCourse({ title: "", students: "" });
     } catch (error) {

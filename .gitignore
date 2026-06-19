@@ -22,6 +22,5 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Temp Vite scaffolds (wrong template, not needed)
-frontend/
-frontend2/
+# Unused assets directory (empty after cleanup)
+frontend3/src/assets/
