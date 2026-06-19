@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+frontend3/node_modules/
+backend/node_modules/
+
+# Build output
+frontend3/dist/
+frontend3/.vite/
+
+# Environment variables
+backend/.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Temp Vite scaffolds (wrong template, not needed)
+frontend/
+frontend2/
