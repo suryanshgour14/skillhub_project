@@ -1,33 +1,48 @@
 import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ThemeContext } from "./ThemeContext";
-import { FaMoon, FaSun } from "react-icons/fa";
+import { FaMoon, FaSun, FaGraduationCap } from "react-icons/fa";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
   const { dark, setDark } = useContext(ThemeContext);
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
 
   return (
-    <nav>
-      <h2>SkillHub</h2>
-      <ul>
+    <nav className="navbar">
+      <Link to="/" className="nav-brand">
+        <FaGraduationCap className="nav-logo-icon" />
+        <span className="nav-logo-text">SkillHub</span>
+      </Link>
+
+      <ul className="nav-links">
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/" className={isActive("/") ? "active" : ""}>Home</Link>
         </li>
-        <li onClick={() => setOpen(!open)} className="menu-item">
-          Courses ▼
+        <li
+          className="dropdown-wrapper"
+          onClick={() => setOpen(!open)}
+          onBlur={() => setTimeout(() => setOpen(false), 150)}
+          tabIndex={0}
+        >
+          <span className={`nav-link ${isActive("/courses") || isActive("/add-course") ? "active" : ""}`}>
+            Courses ▾
+          </span>
           {open && (
             <div className="dropdown">
-              <Link to="/courses">All Courses</Link>
-              <Link to="/add-course">Add Course</Link>
+              <Link to="/courses" onClick={() => setOpen(false)}>All Courses</Link>
+              <Link to="/add-course" onClick={() => setOpen(false)}>Add Course</Link>
             </div>
           )}
         </li>
         <li>
-          <Link to="/contact">Contact</Link>
+          <Link to="/contact" className={isActive("/contact") ? "active" : ""}>Contact</Link>
         </li>
       </ul>
-      <button className="theme-btn" onClick={() => setDark(!dark)}>
+
+      <button className="theme-btn" onClick={() => setDark(!dark)} aria-label="Toggle theme">
         {dark ? <FaSun /> : <FaMoon />}
       </button>
     </nav>
